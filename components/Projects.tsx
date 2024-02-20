@@ -19,7 +19,7 @@ export default function Projects({ }: Props) {
             }}
             className="h-screen flex flex-col relative text-left overflow-hidden  md:flex-row max-w-full px-10 justify-evenly mx-auto items-center z-0">
             <h3 className="absolute lg:font-semibold top-20 uppercase tracking-[20px] text-gray-500 text-2xl ">Projects</h3>
-            <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20">
+            <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20  scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#0b53b3]/80">
                 {projects.map((project, i) => (
                     <div key={i} className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20  md:p-44 h-screen">
                        <motion.div 

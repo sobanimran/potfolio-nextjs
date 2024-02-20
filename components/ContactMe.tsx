@@ -1,10 +1,27 @@
 "use client"
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from "@heroicons/react/16/solid"
 import { motion } from "framer-motion"
+import { useForm, SubmitHandler } from "react-hook-form"
+
 
 type Props = {}
+type Inputs = {
+    name:string
+    email:string
+    subject:string
+    message:string
+  }
 
 export default function ContactMe({ }: Props) {
+    const {
+        register,
+        handleSubmit,
+        watch,
+      
+      } = useForm<Inputs>()
+      const onSubmit: SubmitHandler<Inputs> = (data) =>{
+        window.location.href = `mailto:soubansheikh163@gmail?subject=${data.subject}&body= Hi, My name is ${data.name}. ${data.message}  (${data.email}) `
+      }
     return (
         <motion.div
             initial={{
@@ -34,12 +51,13 @@ export default function ContactMe({ }: Props) {
                         <p className="text-2xl">123 Developer lane</p>
                     </div>
                 </div>
-                <form className="flex flex-col space-y-2 w-fit mx-auto">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-2 w-fit mx-auto">
                     <div className="flex space-x-2">
-                        <input placeholder="Name" className="contactInput" type="text" /><input placeholder="Email" className="contactInput" type="email" />
+                        <input {...register('name')} placeholder="Name" className="contactInput" type="text" />
+                        <input {...register('email')} placeholder="Email" className="contactInput" type="email" />
                     </div>
-                    <input  placeholder="Subject" className="contactInput" type="text" />
-                    <textarea  placeholder="Messsage" className="contactInput" />
+                    <input  {...register('subject')} placeholder="Subject" className="contactInput" type="text" />
+                    <textarea  {...register('message')} placeholder="Messsage" className="contactInput" />
                     <button className="bg-[#0b53b3] py-5 px-10 rounded-md text-black font-bold text-lg">Submit</button>
                 </form>
             </div>
