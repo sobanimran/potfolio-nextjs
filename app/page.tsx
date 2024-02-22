@@ -1,4 +1,3 @@
-import { GetStaticProps } from "next";
 import Link from "next/link";
 import About from "~/components/About";
 import ContactMe from "~/components/ContactMe";
@@ -70,17 +69,3 @@ export default async function Home() {
     </div>
   );
 }
-// export const getStaticProp:GetStaticProps<Props> = async () => {
-
-//  return{
-//   props : {
-//     pageInfo,
-//     experiences,
-//     skills,
-//     projects,
-//     socials,
-//   },
- 
-// }
-
-// }
