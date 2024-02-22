@@ -1,10 +1,13 @@
 "use client"
 import { motion } from "framer-motion"
 import ExperienceCard from "./ExperienceCard"
+import { Experience } from "~/typing"
 
-type Props = {}
+type Props = {
+  experiences:Experience[]
+}
 
-export default function WorkExperience({}: Props) {
+export default function WorkExperience({experiences}: Props) {
   return (
     <motion.div   
     initial={{
@@ -22,10 +25,12 @@ export default function WorkExperience({}: Props) {
        <div className="w-full flex space-x-5 overflow-x-scroll p-10 snap-x snap-mandatory scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#0b53b3]/80">
 
           {/* Experience Card  */}
-          <ExperienceCard />
-          <ExperienceCard />
-          <ExperienceCard />
-          <ExperienceCard />
+          {experiences?.map(experience=>(
+
+            <ExperienceCard key={experience._id} experience={experience} />
+          ))
+          }
+          
        </div>
       </motion.div>
   )

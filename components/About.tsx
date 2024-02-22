@@ -2,10 +2,14 @@
 import { motion } from "framer-motion"
 import Pic from "~/assets/aa.png"
 import Image from "next/image"
+import { PageInfo } from "~/typing"
+import { urlForImage } from "~/sanity/lib/image"
 
-type Props = {}
+interface Props { 
+  pageInfo:PageInfo
+}
 
-export default function About({ }: Props) {
+export default function About({ pageInfo}: Props) {
   return (
     <motion.div   
     initial={{
@@ -34,19 +38,12 @@ export default function About({ }: Props) {
           duration: 1.2
         }}
       >
-        <Image alt="profile" className="object-cover w-[100%] h-[100%]" width={434} height={575} src={Pic} />
+        <Image alt="profile" className="object-cover w-[100%] h-[100%]" width={434} height={575} src={urlForImage(pageInfo?.profilePic)} />
       </motion.div>
-      <div className="space-y-10 px-0 md:px-10">
-        <h4 className="text-4xl font-semibold">Here is A <span className="underline decoration-[#F7AB0A]/50">little</span>  Background</h4>
-        <p className="text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente quidem nihil aliquid mollitia
-           impedit perspiciatis quibusdam ut placeat architecto commodi! Nobis ipsam explicabo maxime illo
-            magni? Expedita eveniet libero eaque aut odit laboriosam quo sequi nostrum, eius amet 
-            accusantium dicta molestiae beatae itaque debitis. Consequatur incidunt facere ex, possimus 
-            iusto dicta itaque quo voluptatem eveniet eligendi reprehenderit similique quibusdam consequuntur
-             ab! Voluptas omnis alias iusto. Atque obcaecati perferendis quod saepe. Nesciunt inventore est 
-             ab! Nihil suscipit sapiente, alias porro mollitia labore? Voluptas eveniet omnis vel! Vero 
-             corrupti quibusdam reiciendis aut! Amet est totam eveniet hic, rem quo doloremque in dolorum 
-             sunt blanditiis provident debitis dolor suscipit nulla voluptatum autem temporibus harum </p>
+      <div className="space-y-5 md:space-y-8 lg:space-y-10 px-0 md:px-8">
+        <h4 className="text-2xl md:text-3xl lg:text-4xl font-semibold">Here is A <span className="underline decoration-[#F7AB0A]/50">little</span>  Background</h4>
+        <p className="text-sm md:text-base ">{pageInfo?.bgInfo}
+             </p>
       </div>
     </motion.div>
   )

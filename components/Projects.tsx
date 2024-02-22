@@ -1,11 +1,15 @@
 "use client"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { urlForImage } from "~/sanity/lib/image"
+import { Project } from "~/typing"
 
-type Props = {}
+type Props = {
+    projects: Project[]
+}
 
-export default function Projects({ }: Props) {
-    const projects = [1, 2, 3, 4, 5]
+export default function Projects({ projects }: Props) {
+
     return (
         <motion.div
             initial={{
@@ -22,20 +26,26 @@ export default function Projects({ }: Props) {
             <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20  scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#0b53b3]/80">
                 {projects.map((project, i) => (
                     <div key={i} className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center justify-center p-20  md:p-44 h-screen">
-                       <motion.div 
-                       initial={{
-                        y:-300,
-                        opacity:0
-                       }}
-                       whileInView={{opacity:1,y:0}}
-                       transition={{duration:1.5}}
-                       viewport={{once:true}}
-                       >
-                        <Image className="w-72 h-52 " src="https://assets.mspimages.in/gear/wp-content/uploads/2022/08/netflix-3.jpg" alt="project Image" width={800} height={800} />
-                       </motion.div>
+                        <motion.div
+                            initial={{
+                                y: -300,
+                                opacity: 0
+                            }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.5 }}
+                            viewport={{ once: true }}
+                        >
+                            <Image className="w-72 h-52 " src={urlForImage(project.image)} alt={project.title} width={800} height={800} />
+                        </motion.div>
                         <div className="space-y-10 px-0 md:px-10 max-w-6xl">
-                            <h4 className="text-4xl font-semibold text-center"><span className="underline decoration-[#0b53b3]/70 ">Case Study {i + 1} of {projects.length} : </span>Ecom-store</h4>
-                            <p className="text-lg text-center md:text-left">Lorem .Consequatur nostrum quae cumque consequuntur dolor quod odit cum laboriosam,t eos temporibus sapiente ducimus consectetur suscipit. Consequuntur eos magni delectus dolor asperiores sed beatae inventore nobis ratione. Tempore illum, fugit assumenda ratione tenetur at ut perferendis quos modi quidem!</p>
+                            <h4 className="text-4xl font-semibold text-center"><span className="underline decoration-[#0b53b3]/70 ">Case Study {i + 1} of {projects.length} : </span>{project.title}</h4>
+                        <div className="flex space-x-2 my-2 justify-center">
+                            {project.techs.map(tech => (
+
+                                <Image key={tech?._id} src={urlForImage(tech?.image)} alt={tech?.title} width={100} height={100} className="w-10 h-10 rounded-full object-cover object-center" />
+                            ))}
+                        </div>
+                            <p className="text-lg text-center md:text-left">{project.summary}</p>
                         </div>
                     </div>
                 ))}

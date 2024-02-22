@@ -1,12 +1,15 @@
 import { motion } from "framer-motion"
 import Image from "next/image"
 import SanityLogo from "~/assets/sanity.png"
+import { urlForImage } from "~/sanity/lib/image"
+import { Skill } from "~/typing"
 
 type Props = {
+  skill:Skill
     directionLeft?:boolean
 }
 
-export default function Skill({directionLeft}: Props) {
+export default function Skill({directionLeft,skill}: Props) {
   return (<div className="group relative flex cursor-pointer">
       <motion.div initial={{
         x:directionLeft?-200:200,
@@ -14,13 +17,13 @@ export default function Skill({directionLeft}: Props) {
       }}
       transition={{duration:1.2}}
       whileInView={{opacity:1,x:0}}
-      className="h-24 w-24 rounded-full border border-gray-500 xl:w-32 xl:h-32 md:h-28 md:w-28 filter group-hover:grayscale transition duration-300 ease-in-out"
+      className="h-24 w-24 rounded-full border border-gray-500  md:h-28 md:w-28 filter group-hover:grayscale transition duration-300 ease-in-out"
       >
-        <Image src={SanityLogo} alt="Skill Logo"  className="w-[100%] h-[100%] object-cover object-center"/>
+        <Image src={urlForImage(skill.image)} alt={skill.title} width={200}  height={200} className="w-[100%] h-[100%] rounded-full object-cover object-center"/>
       </motion.div>
-      <div className="z-0 absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white h-24 w-24 md:h-28 md:w-28 xl:w-32 xl:h-32 rounded-full" >
+      <div className="z-0 absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white h-24 w-24 md:h-28 md:w-28  rounded-full" >
         <div className="flex items-center justify-center h-full">
-          <p className="text-3xl font-bold text-black opacity-100">100%</p>
+          <p className="text-3xl font-bold text-black opacity-100">{skill.progress}%</p>
         </div>
       </div>
   </div>
